@@ -28,6 +28,7 @@ public:
 	void addAtTail(int _cur);	//插入新的尾节点
 	void addAtIndex(int _index, int _val);	//在第index处插入新节点
 	void deleteAtIndex(int _index);	//删除第index处的节点
+	void reverseList();		//反转链表
 	int getLength();	//返回链表的长度
 	int getHead();	//返回头节点
 	int getTail();	//返回尾节点
@@ -157,6 +158,26 @@ void LinkedList::deleteAtIndex(int _index)	//删除第index处的节点
 		}
 		temp->next = temp->next->next;
 	}
+}
+
+void LinkedList::reverseList()	//反转链表
+{
+	Node *pReversedHead = NULL;
+	Node *pNode = head;
+	Node *pPrev = NULL;
+	while (pNode)
+	{
+		Node *pNext = pNode->next;
+
+		if (!pNext)
+			pReversedHead = pNode;
+
+		pNode->next = pPrev;
+
+		pPrev = pNode;
+		pNode = pNext;
+	}
+	head = pReversedHead;
 }
 
 int LinkedList::getLength()	//返回链表的长度
