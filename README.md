@@ -14,12 +14,12 @@ struct Node //节点
 {
   int val;  //节点中储存的数据
   Node *next; //下一个节点的指针
-}
+};
 
 class LinkedList  //链表
 {
   Node *head; //头结点
-}
+};
 
 ```
 头结点代表一个链表，所以头结点的指定非常重要。  
