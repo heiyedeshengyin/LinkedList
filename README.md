@@ -10,15 +10,17 @@
     
 节点对象和链表对象(单链表)  
 ```cpp
+template <typename T>
 struct Node //节点
 {
-  int val;  //节点中储存的数据
-  Node *next; //下一个节点的指针
+  T val;  //节点中储存的数据
+  Node<T> *next; //下一个节点的指针
 };
 
+template <typename T>
 class LinkedList  //链表
 {
-  Node *head; //头结点
+  Node<T> *head; //头结点
 };
 
 ```
@@ -30,7 +32,7 @@ class LinkedList  //链表
 
 int main()
 {
-	LinkedList s1;
+	LinkedList<int> s1;
 	s1.creatList(5);
 	cout << s1 << endl;
 	cout << s1.getLength() << endl;
