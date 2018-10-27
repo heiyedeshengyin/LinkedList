@@ -3,52 +3,58 @@
 #include<iostream>
 using namespace std;
 
+template <typename T>
 struct Node	//节点
 {
-	int val;	//节点的值
-	Node *next;	//下一个节点的指针
+	T val;	//节点的值
+	Node<T> *next;	//下一个节点的指针
+
 	Node()
 	{
-		val = 0;
+		val = NULL;
 		next = NULL;
 	}
 };
 
+template <typename T>
 class LinkedList	//单链表
 {
 private:
-	Node *head;	//头节点
+	Node<T> *head;	//头节点
 public:
 	LinkedList();	//默认构造函数
-	LinkedList(int _val);	//构造函数
+	LinkedList(T _val);	//构造函数
 	~LinkedList();	//析构函数
 	void creatList(int length);	//输入链表
 	void show();	//显示链表
-	void addAtHead(int _cur);	//插入新的头结点
-	void addAtTail(int _cur);	//插入新的尾节点
-	void addAtIndex(int _index, int _val);	//在第index处插入新节点
+	void addAtHead(T _cur);	//插入新的头结点
+	void addAtTail(T _cur);	//插入新的尾节点
+	void addAtIndex(int _index, T _val);	//在第index处插入新节点
 	void deleteAtIndex(int _index);	//删除第index处的节点
 	void reverseList();		//反转链表
 	int getLength();	//返回链表的长度
-	int getHead();	//返回头节点
-	int getTail();	//返回尾节点
-	int get(int _index);	//返回第index处的节点
+	T getHead();	//返回头节点
+	T getTail();	//返回尾节点
+	T get(int _index);	//返回第index处的节点
 };
 
-LinkedList::LinkedList()	//默认构造函数
+template <typename T>
+LinkedList<T>::LinkedList()	//默认构造函数
 {
 	head = NULL;
 }
 
-LinkedList::LinkedList(int _val)	//构造函数
+template <typename T>
+LinkedList<T>::LinkedList(T _val)	//构造函数
 {
-	head = new Node;
+	head = new Node<T>;
 	head->val = _val;
 }
 
-LinkedList::~LinkedList()	//析构函数
+template <typename T>
+LinkedList<T>::~LinkedList()	//析构函数
 {
-	Node *p;
+	Node<T> *p;
 	p = head;
 	while (p)
 	{
@@ -59,11 +65,12 @@ LinkedList::~LinkedList()	//析构函数
 	p = NULL;
 }
 
-void LinkedList::creatList(int length)	//输入链表
+template <typename T>
+void LinkedList<T>::creatList(int length)	//输入链表
 {
-	head = new Node;
-	int *n;
-	n = new int[length];
+	head = new Node<T>;
+	T *n;
+	n = new T[length];
 	for (int i = 0; i < length; i++)
 		cin >> n[i];
 	int j = 0;
@@ -72,7 +79,8 @@ void LinkedList::creatList(int length)	//输入链表
 		this->addAtTail(n[j]);
 }
 
-void LinkedList::show()	//显示链表
+template <typename T>
+void LinkedList<T>::show()	//显示链表
 {
 	int i = 0;
 	for (i = 0; i < this->getLength() - 1; i++)
@@ -80,7 +88,8 @@ void LinkedList::show()	//显示链表
 	cout << this->get(i) << endl;
 }
 
-ostream &operator<<(ostream &os, LinkedList &m)	//输出链表
+template <typename T>
+ostream &operator<<(ostream &os, LinkedList<T> &m)	//输出链表
 {
 	int i = 0;
 	for (i = 0; i < m.getLength() - 1; i++)
@@ -89,23 +98,25 @@ ostream &operator<<(ostream &os, LinkedList &m)	//输出链表
 	return os;
 }
 
-void LinkedList::addAtHead(int _cur)	//插入新的头结点
+template <typename T>
+void LinkedList<T>::addAtHead(T _cur)	//插入新的头结点
 {
-	Node *cur;
-	cur = new Node;
+	Node<T> *cur;
+	cur = new Node<T>;
 	cur->val = _cur;
 	cur->next = head;
 	head = cur;
 }
 
-void LinkedList::addAtTail(int _cur)	//插入新的尾节点
+template <typename T>
+void LinkedList<T>::addAtTail(T _cur)	//插入新的尾节点
 {
 	if (head)
 	{
-		Node *cur;
-		cur = new Node;
+		Node<T> *cur;
+		cur = new Node<T>;
 		cur->val = _cur;
-		Node *temp;
+		Node<T> *temp;
 		temp = head;
 		while (temp->next)
 			temp = temp->next;
@@ -113,18 +124,19 @@ void LinkedList::addAtTail(int _cur)	//插入新的尾节点
 	}
 	else
 	{
-		head = new Node;
+		head = new Node<T>;
 		head->val = _cur;
 	}
 }
 
-void LinkedList::addAtIndex(int _index, int _val)	//在第index处插入新节点
+template <typename T>
+void LinkedList<T>::addAtIndex(int _index, T _val)	//在第index处插入新节点
 {
 	if (_index == 0)
 		this->addAtHead(_val);
 	else if (_index < this->getLength())
 	{
-		Node *temp;
+		Node<T> *temp;
 		temp = head;
 		int i = 1;
 		while (i != _index)
@@ -132,8 +144,8 @@ void LinkedList::addAtIndex(int _index, int _val)	//在第index处插入新节�
 			temp = temp->next;
 			i++;
 		}
-		Node *cur;
-		cur = new Node;
+		Node<T> *cur;
+		cur = new Node<T>;
 		cur->val = _val;
 		cur->next = temp->next;
 		temp->next = cur;
@@ -142,13 +154,14 @@ void LinkedList::addAtIndex(int _index, int _val)	//在第index处插入新节�
 		this->addAtTail(_val);
 }
 
-void LinkedList::deleteAtIndex(int _index)	//删除第index处的节点
+template <typename T>
+void LinkedList<T>::deleteAtIndex(int _index)	//删除第index处的节点
 {
 	if (_index == 0)
 		head = head->next;
 	else if (_index < this->getLength())
 	{
-		Node *temp;
+		Node<T> *temp;
 		temp = head;
 		int i = 1;
 		while (i != _index)
@@ -160,14 +173,15 @@ void LinkedList::deleteAtIndex(int _index)	//删除第index处的节点
 	}
 }
 
-void LinkedList::reverseList()	//反转链表
+template <typename T>
+void LinkedList<T>::reverseList()	//反转链表
 {
-	Node *pReversedHead = NULL;
-	Node *pNode = head;
-	Node *pPrev = NULL;
+	Node<T> *pReversedHead = NULL;
+	Node<T> *pNode = head;
+	Node<T> *pPrev = NULL;
 	while (pNode)
 	{
-		Node *pNext = pNode->next;
+		Node<T> *pNext = pNode->next;
 
 		if (!pNext)
 			pReversedHead = pNode;
@@ -180,9 +194,10 @@ void LinkedList::reverseList()	//反转链表
 	head = pReversedHead;
 }
 
-int LinkedList::getLength()	//返回链表的长度
+template <typename T>
+int LinkedList<T>::getLength()	//返回链表的长度
 {
-	Node *temp;
+	Node<T> *temp;
 	temp = head;
 	int i = 0;
 	while (temp)
@@ -193,7 +208,8 @@ int LinkedList::getLength()	//返回链表的长度
 	return i;
 }
 
-int LinkedList::getHead()	//返回头节点
+template <typename T>
+T LinkedList<T>::getHead()	//返回头节点
 {
 	if (head)
 		return head->val;
@@ -201,11 +217,12 @@ int LinkedList::getHead()	//返回头节点
 		return -1;
 }
 
-int LinkedList::getTail()	//返回尾节点
+template <typename T>
+T LinkedList<T>::getTail()	//返回尾节点
 {
 	if (head)
 	{
-		Node *temp;
+		Node<T> *temp;
 		temp = head;
 		while (temp->next)
 			temp = temp->next;
@@ -215,9 +232,10 @@ int LinkedList::getTail()	//返回尾节点
 		return -1;
 }
 
-int LinkedList::get(int index)	//返回第index处的节点
+template <typename T>
+T LinkedList<T>::get(int index)	//返回第index处的节点
 {
-	Node *temp;
+	Node<T> *temp;
 	temp = head;
 	int i = 0;
 	while (temp&&i < index)
