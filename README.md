@@ -1,6 +1,6 @@
 # LinkedList
 双链表已实现,[点击查看](https://github.com/heiyedeshengyin/DoublyLinkedList)  
-其它的数据结构:[二叉树](https://github.com/heiyedeshengyin/BinaryTree) [二叉搜索树](https://github.com/heiyedeshengyin/BinarySearchTree) [AVL树](https://github.com/heiyedeshengyin/AVLTree)
+其它的数据结构:[二叉树](https://github.com/heiyedeshengyin/BinaryTree) [二叉搜索树](https://github.com/heiyedeshengyin/BinarySearchTree) [AVL树](https://github.com/heiyedeshengyin/AVLTree) [红黑树](https://github.com/heiyedeshengyin/RedBlackTree)
   
 基本的数据结构，用面向对象的方式实现单链表，双链表和循环链表  
 链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。  
